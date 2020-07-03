@@ -27,7 +27,6 @@ jobs:
             echo "CLOUDINARY_CLOUD_NAME=${{secrets.CLOUDINARY_CLOUD_NAME}}" >> "./.env"
             echo "CLOUDINARY_API_KEY=${{secrets.CLOUDINARY_API_KEY}}" >> "./.env"
             echo "CLOUDINARY_SECRET=${{secrets.CLOUDINARY_SECRET}}" >> "./.env"
-            echo "MONGO_PORT=${{secrets.MONGO_PORT}}" >> "./.env"
             echo "NODE_PORT=${{secrets.NODE_PORT}}" >> "./.env"
             echo "REACT_PORT=3000" >> "./.env"
             echo "NGINX_PORT=90" >> "./.env"

@@ -62,8 +62,8 @@ services:
   mongodb:
     container_name: mern_mongo
     image: mongo
-    ports:
-      - "${MONGO_PORT}:${MONGO_PORT}"
+    expose:
+      - "27017"
     volumes:
       - mongo:/data/db
 volumes:

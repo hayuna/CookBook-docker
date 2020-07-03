@@ -9,8 +9,6 @@ const connectDB = require("connectdb");
 const routes = require("routes");
 
 connectDB()
-  .then(() => console.log("mongodb connected ..."))
-  .catch(e => console.log(`failed to connect mongodb: ${e}`));
 
 app.use(cors());
 app.use(compression());
