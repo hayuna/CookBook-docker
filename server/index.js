@@ -5,8 +5,8 @@ const logger = require("morgan");
 const compression = require("compression");
 const helmet = require("helmet");
 
-const connectDB = require("connectdb");
-const routes = require("routes");
+const connectDB = require("./connectdb");
+const routes = require("./routes");
 
 connectDB()
 

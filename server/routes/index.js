@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const dish = require("routes/dish.route");
-const ingredient = require("routes/ingredient.route");
-const cloudinary = require("routes/cloudinary.route");
+const dish = require("./dish.route");
+const ingredient = require("./ingredient.route");
+const cloudinary = require("./cloudinary.route");
 
 router.use("/dish", dish);
 router.use("/ingredient", ingredient);

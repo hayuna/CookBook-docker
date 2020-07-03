@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const CONNECT_URL = `mongodb://mongodb:27017/cookbook`; // mern: db name
+const mode = process.env.NODE_ENV === 'production' ? 'mongodb' : 'localhost'
+const CONNECT_URL = `mongodb://${mode}:27017/cookbook`; // mern: db name
 
 const connectDB = () => {
   mongoose.connect(CONNECT_URL, {
