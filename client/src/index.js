@@ -2,21 +2,25 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import "index.scss";
-import Home from "routes/Home";
-import About from "routes/About";
-import Music from "routes/Music";
-import NotFound from "routes/NotFound";
+
+import DishesList from './components/DishesList'
+import DishDetails from './components/DishDetails'
+import NotFound from './components/utils/NotFound'
+import { Container } from './style'
+import AddNewDish from './components/AddNewDish';
 
 const App = () => {
   return (
     <Router>
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/about" component={About} />
-        <Route path="/musics" component={Music} />
-        <Route component={NotFound} />
-      </Switch>
+      <Container>
+        <Switch>
+          <Route exact path='/' component={DishesList} />
+          <Route exact path='/dishes' component={DishesList} />
+          <Route exact path='/dishes/:dishId' component={DishDetails} />
+          <Route exact path='/new' component={AddNewDish} />
+          <Route component={NotFound} />
+        </Switch>
+      </Container>
     </Router>
   );
 };

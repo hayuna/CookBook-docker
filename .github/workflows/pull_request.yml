@@ -1,0 +1,45 @@
+name: CI/CD Pull Request
+
+on: pull_request
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v1
+      - name: access to server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          port: ${{ secrets.SERVER_PORT }}
+          timeout: 30m
+          command_timeout: 60m
+          script: |
+            mkdir -p /home/cookbook/${{github.head_ref}}
+            cd /home/cookbook/${{github.head_ref}}
+            git remote add origin https://github.com/${{github.repository}}
+            git clone https://github.com/${{github.repository}} .
+            git checkout ${{github.head_ref}}
+            git pull origin ${{github.head_ref}}
+            echo "NGINX_PORT=200${{github.event.pull_request.number}}" >> "./.env"
+            echo "CLOUD_NAME=mras2303 >> "./.env"
+            echo "CLOUDINARY_API_KEY=338496921679358 >> "./.env"
+            echo "CLOUDINARY_SECRET=cs7Si01z2gdSJei0oyurfyH2fFQ >> "./.env"
+            docker-compose -f "docker-compose.yml" up -d --build
+      - name: update pull request
+        uses: tzkhan/pr-update-action@v1.1.1
+        with:
+          repo-token: "${{ secrets.GH_PAT }}"
+          branch-regex: ".+"
+          lowercase-branch: false
+          title-template: "[%branch%]"
+          replace-title: false
+          title-prefix-space: true
+          uppercase-title: true
+          body-template: "[Link to demo](${{secrets.SERVER_PROTOCOL}}${{secrets.SERVER_HOST}}:100${{github.event.pull_request.number}})"
+          replace-body: true
+          body-prefix-newline-count: 2
+          uppercase-body: true

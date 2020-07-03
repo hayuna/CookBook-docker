@@ -1,0 +1,31 @@
+name: CI/CD PROD
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          port: ${{ secrets.SERVER_PORT }}
+          timeout: 30m
+          command_timeout: 60m
+          script: |
+            mkdir -p /home/cookbook/prod
+            cd /home/cookbook/prod
+            git remote add origin https://github.com/${{github.repository}}
+            git clone https://github.com/${{github.repository}} .
+            git checkout ${{github.head_ref}}
+            git pull origin ${{github.head_ref}}
+            echo "NGINX_PORT=90" >> "./.env"
+            echo "CLOUD_NAME=mras2303 >> "./.env"
+            echo "CLOUDINARY_API_KEY=338496921679358 >> "./.env"
+            echo "CLOUDINARY_SECRET=cs7Si01z2gdSJei0oyurfyH2fFQ >> "./.env"
+            docker-compose -f "docker-compose.yml" up -d --build
