@@ -10,7 +10,8 @@ RUN npm install
 
 COPY . /usr/src/app
 
-EXPOSE 3000
+ARG REACT_PORT
+EXPOSE ${REACT_PORT}
 
 # production
 # RUN으로 실행하면 dist 폴더가 생성되지 않고 제대로 빌드되지 않음

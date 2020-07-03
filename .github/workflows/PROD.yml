@@ -25,7 +25,11 @@ jobs:
             git checkout ${{github.head_ref}}
             git pull origin ${{github.head_ref}}
             echo "NGINX_PORT=90" >> "./.env"
-            echo "CLOUD_NAME=mras2303 >> "./.env"
-            echo "CLOUDINARY_API_KEY=338496921679358 >> "./.env"
-            echo "CLOUDINARY_SECRET=cs7Si01z2gdSJei0oyurfyH2fFQ >> "./.env"
+            echo "CLOUD_NAME=mras2303" >> "./.env"
+            echo "CLOUDINARY_API_KEY=338496921679358" >> "./.env"
+            echo "CLOUDINARY_SECRET=cs7Si01z2gdSJei0oyurfyH2fFQ" >> "./.env"
+            echo "REACT_PORT=3000" >> "./.env"
+            echo "NODE_PORT=5000" >> "./.env"
+            echo "NODE_PORT_SECOND=5001" >> "./.env"
+            echo "MONGO_PORT=27017" >> "./.env"
             docker-compose -f "docker-compose.yml" up -d --build
