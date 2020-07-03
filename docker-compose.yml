@@ -36,7 +36,7 @@ services:
     environment:
       - NODE_PATH=src
       - NODE_ENV=production
-      - CLOUD_NAME=${CLOUD_NAME}
+      - CLOUDINARY_CLOUD_NAME=${CLOUDINARY_CLOUD_NAME}
       - CLOUDINARY_API_KEY=${CLOUDINARY_API_KEY}
       - CLOUDINARY_SECRET=${CLOUDINARY_SECRET}
     env_file:
