@@ -66,6 +66,5 @@ services:
       - "${MONGO_PORT}:${MONGO_PORT}"
     volumes:
       - mongo:/data/db
-
 volumes:
   mongo:
