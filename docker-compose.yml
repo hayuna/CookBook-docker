@@ -9,7 +9,7 @@ services:
         REACT_PORT: ${REACT_PORT}
     image: sylee/mern_web
     ports:
-      - "${REACT_PORT}:${REACT_PORT}"
+      - "${REACT_PORT}"
     volumes:
       - ./client:/usr/src/app
       - /usr/src/app/node_modules
