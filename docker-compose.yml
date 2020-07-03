@@ -6,7 +6,7 @@ services:
       context: ./client
       dockerfile: Dockerfile.dev
       args:
-        REACT_PORT: 3000
+        REACT_PORT: "3000"
     image: sylee/mern_web
     ports:
       - "3000:3000"
@@ -24,7 +24,7 @@ services:
       context: ./server
       dockerfile: Dockerfile.dev
       args:
-        NODE_PORT: 5000
+        NODE_PORT: "5000"
     image: sylee/mern_server
     expose:
       - "5000"
